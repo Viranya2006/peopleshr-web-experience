@@ -20,9 +20,9 @@ export default function Home() {
           <li key={tool.href}>
             <Link
               href={tool.href}
-              className="group grid gap-x-8 gap-y-2 py-8 sm:grid-cols-[88px_minmax(0,1fr)_auto] sm:items-center"
+              className="group grid gap-x-8 gap-y-2 py-8 sm:grid-cols-[120px_minmax(0,1fr)_auto] sm:items-center"
             >
-              <span className="num text-sm font-bold text-blue">Challenge {tool.challenge}</span>
+              <span className="num whitespace-nowrap text-sm font-bold text-blue">Challenge {tool.challenge}</span>
               <span>
                 <span className="block text-2xl font-bold text-navy group-hover:text-blue">{tool.name}</span>
                 <span className="mt-1 block max-w-2xl">{tool.pitch}</span>
