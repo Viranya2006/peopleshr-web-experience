@@ -4,12 +4,12 @@ export const guide: Guide = {
   slug: "epf-etf-calculation-sri-lanka",
   title: "How EPF and ETF are calculated in Sri Lanka, with a worked example",
   description:
-    "EPF is 8% from the employee and 12% from the employer; ETF is 3% from the employer. What counts as earnings, a worked example, and the mistakes that cause surcharges.",
+    "EPF is 8% from the employee and 12% from the employer; ETF is 3% from the employer. What counts as earnings, a worked example, deadlines and late-payment surcharges.",
   stage: "understand",
   shortAnswer:
     "EPF is 20% of an employee's monthly earnings: 8% deducted from the employee and 12% paid by the employer. ETF is a further 3%, paid only by the employer. On earnings of LKR 100,000, the employee's EPF is LKR 8,000, the employer's EPF is LKR 12,000 and ETF is LKR 3,000.",
-  updated: "2026-10-12",
-  readMinutes: 5,
+  updated: "2026-10-22",
+  readMinutes: 6,
   toolPreset: "cur=LKR",
   sections: [
     {
@@ -18,7 +18,7 @@ export const guide: Guide = {
       blocks: [
         {
           type: "p",
-          text: "The Employees' Provident Fund (EPF) is a retirement fund managed by the Central Bank of Sri Lanka. The Employees' Trust Fund (ETF) is a separate fund run by the Employees' Trust Fund Board. Private-sector employers covered by the two Acts must contribute to both every month for each eligible employee.",
+          text: "The Employees' Provident Fund (EPF) is a retirement fund managed by the Central Bank of Sri Lanka. The Employees' Trust Fund (ETF) is a separate fund run by the Employees' Trust Fund Board. Most employers must contribute to both every month for each employee, including casual, temporary and contract staff. There are a few exceptions, such as household employees for EPF and businesses employing only family members for ETF.",
         },
       ],
     },
@@ -37,7 +37,7 @@ export const guide: Guide = {
             ["Total", "", "23%"],
           ],
         },
-        { type: "p", text: "ETF can't be deducted from the employee's salary. It's an employer cost on top of gross pay." },
+        { type: "p", text: "The EPF rates are minimums; an employer can agree to pay more. ETF can't be deducted from the employee's salary. It's an employer cost on top of gross pay." },
       ],
     },
     {
@@ -46,7 +46,19 @@ export const guide: Guide = {
       blocks: [
         {
           type: "p",
-          text: "Contributions are calculated on the employee's total earnings for the month, not just basic salary. Earnings generally include basic salary, cost-of-living allowance and other regular allowances. Overtime is generally excluded.",
+          text: "Contributions are calculated on the employee's total earnings for the month, not just basic salary.",
+        },
+        {
+          type: "table",
+          caption: "What is and isn't counted as earnings for EPF",
+          head: ["Counted as earnings", "Not counted"],
+          rows: [
+            ["Salary, wages or fees", "Overtime pay"],
+            ["Cost-of-living, special living and similar allowances", "Bonuses and incentive payments"],
+            ["Holiday pay", "Reimbursed travel expenses"],
+            ["Food allowances and the value of food provided", ""],
+            ["Commissions, piece-rate and contract payments", ""],
+          ],
         },
         {
           type: "p",
@@ -85,7 +97,24 @@ export const guide: Guide = {
       blocks: [
         {
           type: "p",
-          text: "Both are paid monthly, by the end of the month after the one the wages relate to, together with the contribution returns. Late payment attracts surcharges, so confirm current deadlines and forms with the Central Bank's EPF Department and the ETF Board.",
+          text: "Both are paid monthly, on or before the last working day of the following month. EPF is paid with Form C or an electronic return. ETF is paid with an R1 or R4 remittance form.",
+        },
+        {
+          type: "p",
+          text: "From July 2026 contributions, employers with 15 or more employees must pay ETF and submit returns electronically; cash, cheque and money-order payments are no longer accepted.",
+        },
+        {
+          type: "table",
+          caption: "Surcharges on late EPF and ETF contributions",
+          head: ["Paid late by", "Surcharge"],
+          rows: [
+            ["Up to 10 days", "5%"],
+            ["11 days to 1 month", "15%"],
+            ["1 to 3 months", "20%"],
+            ["3 to 6 months", "30%"],
+            ["6 to 12 months", "40%"],
+            ["More than 12 months", "50%"],
+          ],
         },
       ],
     },
@@ -97,7 +126,8 @@ export const guide: Guide = {
           type: "ul",
           items: [
             "Calculating on basic salary only and leaving out regular allowances",
-            "Including overtime in the EPF and ETF base",
+            "Including overtime or bonuses in the EPF and ETF base",
+            "Leaving out food allowances or commissions, which do count",
             "Deducting ETF from the employee",
             "Missing contributions for an employee's final month",
             "Employee details that don't match the member number, so contributions aren't credited",
@@ -106,7 +136,7 @@ export const guide: Guide = {
         {
           type: "callout",
           title: "Check before you rely on this",
-          text: "This guide reflects how the EPF and ETF rules are commonly applied in 2026. Rates and definitions can change, so check current regulations before using these figures for payroll.",
+          text: "Checked against the EPF Department (epf.lk) and ETF Board (etfb.lk) guidance in October 2026. Rules can change, so confirm with those sources or your auditor before relying on these figures for payroll.",
         },
         {
           type: "p",
@@ -118,7 +148,7 @@ export const guide: Guide = {
   faqs: [
     {
       q: "Is EPF calculated on gross salary?",
-      a: "On total earnings, which is close to gross salary but generally excludes overtime. Basic salary, cost-of-living allowance and regular allowances are generally included.",
+      a: "On total earnings, which is close to gross salary but not the same. Salary, cost-of-living and similar allowances, food allowances and commissions are included. Overtime, bonuses, incentive payments and reimbursed travel are excluded.",
     },
     {
       q: "Can ETF be deducted from an employee's salary?",

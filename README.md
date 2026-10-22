@@ -4,13 +4,19 @@ Submission for the PeoplesHR Web Experience Engineer practical assessment.
 
 **Challenges chosen: 01, 03 and 05.**
 
-| # | Challenge | Prototype | Route |
-|---|---|---|---|
-| 01 | Visitors can't quantify the cost of inefficient work | Admin cost check | `/admin-cost` |
-| 03 | Visitors are unsure where to begin improving operations | HR operations health check | `/health-check` |
-| 05 | Useful content doesn't lead visitors toward solutions | Payroll & HR operations guides | `/guides` |
+**Live site: https://peopleshr-web-experience.vercel.app**
+**Source: https://github.com/Viranya2006/peopleshr-web-experience**
 
-Live: _add the Vercel URL here after deploying_
+| # | Challenge | Prototype | Working URL |
+|---|---|---|---|
+| 01 | Visitors can't quantify the cost of inefficient work | Admin cost check | https://peopleshr-web-experience.vercel.app/admin-cost |
+| 03 | Visitors are unsure where to begin improving operations | HR operations health check | https://peopleshr-web-experience.vercel.app/health-check |
+| 05 | Useful content doesn't lead visitors toward solutions | Payroll & HR operations guides | https://peopleshr-web-experience.vercel.app/guides |
+
+Try these too:
+- [Example shared health-check result](https://peopleshr-web-experience.vercel.app/health-check#r=110121122130.l.manufacturing.hr) (a manufacturing company with 201–1,000 staff)
+- [Cost check in Sri Lankan rupees for 800 employees](https://peopleshr-web-experience.vercel.app/admin-cost?n=800&cur=LKR)
+- [A guide page](https://peopleshr-web-experience.vercel.app/guides/epf-etf-calculation-sri-lanka), plus [`/llms.txt`](https://peopleshr-web-experience.vercel.app/llms.txt) and [`/sitemap.xml`](https://peopleshr-web-experience.vercel.app/sitemap.xml)
 
 All three are in one Next.js app so they share a design system, lead capture and tracking, and link to each other the way they would on peopleshr.com. The outcomes of challenges 02 (package fit) and 04 (lead capture) are built into all three.
 
@@ -33,7 +39,7 @@ npm run build && npm start
 
 ---
 
-## 01 · Admin cost check (`/admin-cost`)
+## 01 · Admin cost check ([live](https://peopleshr-web-experience.vercel.app/admin-cost))
 
 **Problem.** Buyers feel that HR admin is slow but can't say what it costs, so there's no business case.
 
@@ -52,7 +58,7 @@ npm run build && npm start
 - Next steps: "Email me the breakdown" (light form), "Book a 30-minute walkthrough" (the lead carries their figures), copy a share link for the finance lead (state lives in the URL), and Save as PDF (print stylesheet).
 - The three biggest lines link to the PeoplesHR modules that address them.
 
-## 03 · HR operations health check (`/health-check`)
+## 03 · HR operations health check ([live](https://peopleshr-web-experience.vercel.app/health-check))
 
 **Problem.** Visitors know HR needs work but not what to fix first.
 
@@ -72,7 +78,7 @@ npm run build && npm start
 - The extra value is gated: a 90-day plan, an industry comparison, and a one-page summary for leadership.
 - Secondary CTA: "Book a call", with the stage and priorities passed in so sales starts from the visitor's answers.
 
-## 05 · Payroll & HR operations guides (`/guides`)
+## 05 · Payroll & HR operations guides ([live](https://peopleshr-web-experience.vercel.app/guides))
 
 **Problem.** Search and AI-assistant traffic lands on an article and stops there.
 
@@ -121,7 +127,7 @@ Lead capture posts to `/api/lead`. It validates with zod, flags free-mail addres
 - **Brand.** Colours, Plus Jakarta Sans, modules (HR, Pay, Time, Talent, Engagement, Insight, Lexi), package names and proof points all come from peopleshr.com, as does the logo (`public/peopleshr-logo.webp`; the footer shows a white version made with a CSS filter).
 - **Numbers.** All cost-model assumptions are in `lib/admin-cost/model.ts`, and the page renders the same values. Defaults are starting points the visitor is asked to correct, not market data.
 - **Packages.** PeoplesHR doesn't publish which modules sit in which package, so the Manage/Grow/Transform mapping in `lib/health-check/scoring.ts` is my reading of the package names. It's labelled "indicative" on the page.
-- **Content.** The guides are sample content. The EPF/ETF figures (8% / 12% / 3%) are the well-established rates, and the guide carries a "check current regulations" note. "Reviewed by the PeoplesHR payroll team" is placeholder attribution.
+- **Content.** The guides are sample content. The EPF/ETF guide was checked against the official EPF Department (epf.lk) and ETF Board (etfb.lk) guidance in October 2026: rates, what counts as earnings, deadlines, surcharges and the July 2026 electronic-payment rule. "Reviewed by the PeoplesHR payroll team" is placeholder attribution.
 - **No CRM, no emails sent.** The forms validate and succeed, but nothing leaves the server log.
 - **Charts** are plain HTML/CSS bars rather than a chart library. They use one accent for what matters and grey for context, with every value labelled.
 

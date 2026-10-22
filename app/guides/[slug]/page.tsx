@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { Suspense } from "react";
 import { Faq } from "@/components/faq";
 import { ChecklistOffer } from "@/components/guides/checklist-offer";
 import { Blocks } from "@/components/guides/rich-text";
@@ -8,6 +9,10 @@ import { StageCta } from "@/components/guides/stage-cta";
 import { GUIDES, STAGE_INFO, getGuide, nextGuide, relatedGuides } from "@/lib/guides";
 import type { Guide } from "@/lib/guides/types";
 import { JsonLd, absoluteUrl, breadcrumbLd, faqLd } from "@/lib/seo";
+
+// Every guide is fully static. An unknown slug waits for the full render, so it gets a
+// real 404 instead of a loading shell.
+export const ensureStatic = "navigation";
 
 export function generateStaticParams() {
   return GUIDES.map((g) => ({ slug: g.slug }));
@@ -25,7 +30,27 @@ export async function generateMetadata({ params }: PageProps<"/guides/[slug]">):
   };
 }
 
-export default async function GuidePage({ params }: PageProps<"/guides/[slug]">) {
+// The slug is read inside <Suspense> so a client-side navigation can show the page shell
+// immediately. Every guide is still prerendered with its full content.
+export default function GuidePage({ params }: PageProps<"/guides/[slug]">) {
+  return (
+    <Suspense fallback={<GuideSkeleton />}>
+      <GuideArticle params={params} />
+    </Suspense>
+  );
+}
+
+function GuideSkeleton() {
+  return (
+    <div className="mx-auto max-w-6xl animate-pulse px-4 pt-12 sm:px-6" aria-hidden="true">
+      <div className="h-4 w-40 rounded bg-surface-2" />
+      <div className="mt-5 h-10 max-w-2xl rounded bg-surface-2" />
+      <div className="mt-8 h-32 max-w-3xl rounded-[var(--radius-card)] bg-surface" />
+    </div>
+  );
+}
+
+async function GuideArticle({ params }: Pick<PageProps<"/guides/[slug]">, "params">) {
   const guide = getGuide((await params).slug);
   if (!guide) notFound();
 
