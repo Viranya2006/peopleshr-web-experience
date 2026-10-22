@@ -44,6 +44,8 @@ export function LeadForm({
     e.preventDefault();
     const data = Object.fromEntries(new FormData(e.currentTarget)) as Record<string, string>;
     const payload = Object.fromEntries(Object.entries(data).filter(([, v]) => v.trim() !== ""));
+    // Which guide or tool sent the visitor here, so sales knows what they were reading.
+    const from = new URLSearchParams(window.location.search).get("from");
 
     setStatus("sending");
     setErrors({});
@@ -51,7 +53,7 @@ export function LeadForm({
       const res = await fetch("/api/lead", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...payload, source, intent, context }),
+        body: JSON.stringify({ ...payload, source, intent, context: from ? { ...context, from } : context }),
       });
       const json = await res.json();
       if (!json.ok) {

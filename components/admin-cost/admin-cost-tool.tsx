@@ -17,12 +17,15 @@ export function AdminCostTool() {
   const [state, setState] = useState<CalcState>(() => defaultState());
   const [hydrated, setHydrated] = useState(false);
   const started = useRef(false);
+  const referrer = useRef<string | undefined>(undefined);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
+    referrer.current = params.get("from") ?? undefined;
+    params.delete("from");
     const fallback = defaultState(currencyForLocale(navigator.language));
     // eslint-disable-next-line react-hooks/set-state-in-effect -- reading the URL is only possible after hydration
-    setState(params.has("n") || params.has("cur") ? fromSearchParams(params, fallback) : fallback);
+    setState(params.size > 0 ? fromSearchParams(params, fallback) : fallback);
     setHydrated(true);
   }, []);
 
@@ -37,7 +40,7 @@ export function AdminCostTool() {
   function update(patch: Partial<CalcState>) {
     if (!started.current) {
       started.current = true;
-      track("tool_start", { tool: "admin-cost" });
+      track("tool_start", { tool: "admin-cost", from: referrer.current });
     }
     setState((s) => ({ ...s, ...patch }));
   }

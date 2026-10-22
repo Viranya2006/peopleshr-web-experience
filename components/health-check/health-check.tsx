@@ -64,7 +64,8 @@ export function HealthCheck() {
     setProfile(p);
     setAnswers(emptyAnswers());
     save({ profile: p, answers: emptyAnswers(), step: 0 });
-    track("tool_start", { tool: "health-check", size: p.size, industry: p.industry, role: p.role });
+    const from = new URLSearchParams(window.location.search).get("from") ?? undefined;
+    track("tool_start", { tool: "health-check", from, size: p.size, industry: p.industry, role: p.role });
     go({ kind: "question", step: 0 });
   }
 
