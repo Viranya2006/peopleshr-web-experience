@@ -1,0 +1,120 @@
+@import "tailwindcss";
+
+/* Colours taken from peopleshr.com so the tools sit naturally inside the site. */
+@theme {
+  --color-navy: #0d1b3e;
+  --color-navy-800: #1a2b55;
+  --color-blue: #2563eb;
+  --color-blue-700: #1d4ed8;
+  --color-blue-100: #dbeafe;
+  --color-blue-50: #eff6ff;
+  --color-ink: #374151;
+  --color-muted: #5b6472;
+  --color-line: #e2e8f0;
+  --color-line-strong: #cbd5e1;
+  --color-surface: #f8fafc;
+  --color-surface-2: #f1f5f9;
+  --color-positive: #15803d;
+  --color-positive-50: #f0fdf4;
+  --color-warn: #b45309;
+  --color-warn-50: #fffbeb;
+  --color-paper: #fffdf7;
+
+  --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+
+  --radius-card: 16px;
+}
+
+/* Base rules live in a layer so Tailwind utilities (text-white on a dark card, etc.) can override them. */
+@layer base {
+  html {
+    color: var(--color-ink);
+    background: #fff;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    font-family: var(--font-sans);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    color: var(--color-navy);
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-blue);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+}
+
+@utility num {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Torn-paper bottom edge on the admin bill. */
+.receipt::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -9px;
+  height: 10px;
+  background:
+    linear-gradient(135deg, var(--color-paper) 50%, transparent 50%) 0 0 / 14px 10px repeat-x,
+    linear-gradient(225deg, var(--color-paper) 50%, transparent 50%) 0 0 / 14px 10px repeat-x;
+  filter: drop-shadow(0 1px 0 var(--color-line));
+}
+
+@media print {
+  header,
+  footer,
+  .no-print {
+    display: none !important;
+  }
+  .receipt {
+    box-shadow: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition-colors disabled:cursor-not-allowed disabled:opacity-60;
+  }
+  .btn-primary {
+    @apply bg-blue text-white hover:bg-blue-700;
+  }
+  .btn-secondary {
+    @apply border border-line-strong bg-white text-navy hover:border-navy;
+  }
+  .btn-ghost {
+    @apply text-blue hover:text-blue-700 hover:underline underline-offset-4;
+  }
+  .field-label {
+    @apply mb-1.5 block text-sm font-semibold text-navy;
+  }
+  .field-input {
+    @apply w-full rounded-lg border border-line-strong bg-white px-3 py-2.5 text-[15px] text-navy placeholder:text-muted/70 focus:border-blue focus:outline-none focus:ring-2 focus:ring-blue/25;
+  }
+  .eyebrow {
+    @apply text-xs font-bold uppercase tracking-[0.12em] text-blue;
+  }
+}
