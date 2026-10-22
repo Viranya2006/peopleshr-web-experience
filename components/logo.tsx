@@ -1,16 +1,15 @@
-// Text wordmark, not the official PeoplesHR logo file.
+import Image from "next/image";
+import logo from "@/public/peopleshr-logo.webp";
+
+// Official logo from peopleshr.com. The grey wordmark disappears on navy, so the footer
+// version is turned white with a filter rather than shipping a second file.
 export function Logo({ inverted = false }: { inverted?: boolean }) {
   return (
-    <span className="flex items-center gap-2 text-[19px] font-extrabold tracking-tight">
-      <svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true">
-        <rect width="26" height="26" rx="7" fill="#2563eb" />
-        <circle cx="9.5" cy="9.5" r="3" fill="#fff" />
-        <circle cx="16.5" cy="9.5" r="3" fill="#fff" opacity="0.65" />
-        <path d="M4.5 20c0-3 2.2-5 5-5s5 2 5 5M11.5 20c0-3 2.2-5 5-5s5 2 5 5" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" />
-      </svg>
-      <span className={inverted ? "text-white" : "text-navy"}>
-        Peoples<span className={inverted ? "text-blue-100" : "text-blue"}>HR</span>
-      </span>
-    </span>
+    <Image
+      src={logo}
+      alt="PeoplesHR"
+      preload={!inverted}
+      className={`h-[30px] w-[160px] ${inverted ? "brightness-0 invert" : ""}`}
+    />
   );
 }

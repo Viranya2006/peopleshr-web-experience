@@ -118,7 +118,7 @@ Lead capture posts to `/api/lead`. It validates with zod, flags free-mail addres
 
 ## Decisions and assumptions
 
-- **Brand.** Colours, Plus Jakarta Sans, modules (HR, Pay, Time, Talent, Engagement, Insight, Lexi), package names and proof points all come from peopleshr.com. The logo is a text wordmark, not the official file.
+- **Brand.** Colours, Plus Jakarta Sans, modules (HR, Pay, Time, Talent, Engagement, Insight, Lexi), package names and proof points all come from peopleshr.com, as does the logo (`public/peopleshr-logo.webp`; the footer shows a white version made with a CSS filter).
 - **Numbers.** All cost-model assumptions are in `lib/admin-cost/model.ts`, and the page renders the same values. Defaults are starting points the visitor is asked to correct, not market data.
 - **Packages.** PeoplesHR doesn't publish which modules sit in which package, so the Manage/Grow/Transform mapping in `lib/health-check/scoring.ts` is my reading of the package names. It's labelled "indicative" on the page.
 - **Content.** The guides are sample content. The EPF/ETF figures (8% / 12% / 3%) are the well-established rates, and the guide carries a "check current regulations" note. "Reviewed by the PeoplesHR payroll team" is placeholder attribution.
